@@ -3,14 +3,14 @@ from faunadb.objects import Ref
 from faunadb.client import FaunaClient
 import pytz
 from datetime import datetime
-import telegram.ext
+from telegram.ext import Updater
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
 
 telegram_bot_token = "1407378140:AAErUv3gyd_rigHb4TWt02XhERRRfpXLKo8"
 fauna_secret = "fnAD9rrC8YACB5tTC7f8-cFpkxl6zz1JkQb8KrdX"
 
-updater = telegram.ext.Updater(token=telegram_bot_token, use_context=True)
+updater = Updater(token=telegram_bot_token, use_context=True)
 dispatcher = updater.dispatcher
 client = FaunaClient(secret=fauna_secret)
 
