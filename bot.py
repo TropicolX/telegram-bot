@@ -1,6 +1,4 @@
 import telegram
-from telegram.ext import Updater
-from telegram.ext import CommandHandler
 from faunadb import query as q
 from faunadb.objects import Ref
 from faunadb.client import FaunaClient
