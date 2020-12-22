@@ -3,16 +3,24 @@ from faunadb.objects import Ref
 from faunadb.client import FaunaClient
 import pytz
 from datetime import datetime
-from telegram.ext import Updater
-from telegram.ext import CommandHandler
-from telegram.ext import MessageHandler, Filters
+from telegram.ext import CommandHandler, MessageHandler, Filters
+
 
 telegram_bot_token = "1407378140:AAErUv3gyd_rigHb4TWt02XhERRRfpXLKo8"
 fauna_secret = "fnAD9rrC8YACB5tTC7f8-cFpkxl6zz1JkQb8KrdX"
 
-updater = Updater(token=telegram_bot_token, use_context=True)
-dispatcher = updater.dispatcher
+updater = None
 client = FaunaClient(secret=fauna_secret)
+
+
+def tel(a):
+    a = Updater(token=telegram_bot_token, use_context=True)
+    return a
+
+
+from telegram.ext import Updater
+updater = tel(updater)
+dispatcher = updater.dispatcher
 
 
 def start(update, context):
@@ -119,3 +127,5 @@ def delete_todo(update, context):
 dispatcher.add_handler(MessageHandler(Filters.regex("/update_[0-9]*"), update_todo))
 dispatcher.add_handler(MessageHandler(Filters.regex("/delete_[0-9]*"), delete_todo))
 dispatcher.add_handler(MessageHandler(Filters.text, echo))
+
+
