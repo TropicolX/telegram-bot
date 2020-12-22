@@ -3,7 +3,6 @@ from faunadb.objects import Ref
 from faunadb.client import FaunaClient
 import pytz
 from datetime import datetime
-from telegram.ext import CommandHandler, MessageHandler, Filters
 
 
 telegram_bot_token = "1407378140:AAErUv3gyd_rigHb4TWt02XhERRRfpXLKo8"
@@ -21,6 +20,7 @@ def tel(a):
 from telegram.ext import Updater
 updater = tel(updater)
 dispatcher = updater.dispatcher
+import telegram.ext
 
 
 def start(update, context):
@@ -43,7 +43,7 @@ def start(update, context):
     context.bot.send_message(chat_id=chat_id, text="Welcome to Alex's TODO, your details have been saved 😊")
 
 
-dispatcher.add_handler(CommandHandler("start", start))
+dispatcher.add_handler(telegram.ext.CommandHandler("start", start))
 updater.start_polling()
 
 
@@ -55,7 +55,7 @@ def add_todo(update, context):
     context.bot.send_message(chat_id=chat_id, text="Enter the todo task you want to add 😁")
 
 
-dispatcher.add_handler(CommandHandler("add_todo", add_todo))
+dispatcher.add_handler(telegram.ext.CommandHandler("add_todo", add_todo))
 
 
 def echo(update, context):
@@ -98,7 +98,7 @@ def list_todo(update, context):
     context.bot.send_message(chat_id=chat_id, text=task_message)
 
 
-dispatcher.add_handler(CommandHandler("list_todo", list_todo))
+dispatcher.add_handler(telegram.ext.CommandHandler("list_todo", list_todo))
 
 
 def update_todo(update, context):
@@ -124,8 +124,8 @@ def delete_todo(update, context):
     context.bot.send_message(chat_id=chat_id, text="Successfully deleted todo task status 👌")
 
 
-dispatcher.add_handler(MessageHandler(Filters.regex("/update_[0-9]*"), update_todo))
-dispatcher.add_handler(MessageHandler(Filters.regex("/delete_[0-9]*"), delete_todo))
-dispatcher.add_handler(MessageHandler(Filters.text, echo))
+dispatcher.add_handler(telegram.ext.MessageHandler(telegram.ext.Filters.regex("/update_[0-9]*"), update_todo))
+dispatcher.add_handler(telegram.ext.MessageHandler(telegram.ext.Filters.regex("/delete_[0-9]*"), delete_todo))
+dispatcher.add_handler(telegram.ext.MessageHandler(telegram.ext.Filters.text, echo))
 
 
