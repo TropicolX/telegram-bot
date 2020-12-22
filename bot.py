@@ -13,14 +13,13 @@ client = FaunaClient(secret=fauna_secret)
 
 
 def tel(a):
-    a = Updater(token=telegram_bot_token, use_context=True)
+    a = telegram.ext.Updater(token=telegram_bot_token, use_context=True)
     return a
 
 
-from telegram.ext import Updater
+import telegram.ext
 updater = tel(updater)
 dispatcher = updater.dispatcher
-import telegram.ext
 
 
 def start(update, context):
